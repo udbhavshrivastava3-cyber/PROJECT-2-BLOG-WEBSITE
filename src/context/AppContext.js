@@ -16,7 +16,7 @@ export default function AppContextProvider({children}){
     let url = `${baseUrl}?page=${page}`;
     try{
         const res = await fetch(url);
-        const data = await res.json();
+        const data = await res.json();  
         setPage(data.page);
         setPosts(updatedPosts);
         setTotalPages(data.totalPages);

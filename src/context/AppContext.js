@@ -16,7 +16,16 @@ export default function AppContextProvider({children}){
     let url = `${baseUrl}?page=${page}`;
     try{
         const res = await fetch(url);
-        const data = await res.json();  
+        const data = await res.json();
+        const updatedPosts = data.posts.map((post) => ({
+            ...post,
+            title: post.title?.replace(/2023/g, "2026"),
+            content: post.content?.replace(/2023/g, "2026"),
+            category: post.category?.replace(/2023/g, "2026"),
+            author: post.author?.replace(/2023/g, "2026"),
+            date: post.date?.replace(/2023/g, "2026"),
+            tags: post.tags?.map((tag) => tag.replace(/2023/g, "2026")),
+        }));  
         setPage(data.page);
         setPosts(updatedPosts);
         setTotalPages(data.totalPages);
